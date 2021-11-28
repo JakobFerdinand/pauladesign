@@ -26,20 +26,31 @@ export default {
       },
     },
     {
+      name: 'projectDescription',
+      title: 'Project Description',
+      type: 'markdown'
+    },
+    {
       name: 'categories',
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}],
     },
     {
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{type: 'image'}]
+    },
+    {
+      name: 'enhancedProjectDescription',
+      title: 'EnhancedProjectDescription',
+      type: 'markdown',
+    },
+    {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
-    },
-    {
-      name: 'body',
-      title: 'Body',
-      type: 'string',
     },
   ],
 
