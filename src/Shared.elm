@@ -3,6 +3,7 @@ module Shared exposing (Data, Model, Msg(..), SharedMsg(..), template)
 import Browser.Navigation
 import DataSource
 import Element exposing (..)
+import Element.Font as Font
 import Html exposing (Html)
 import Pages.Flags
 import Pages.PageUrl exposing (PageUrl)
@@ -106,6 +107,24 @@ view sharedData page model toMsg pageView =
                 [ width fill
                 , height fill
                 ]
-                pageView.body
+                [ header
+                , column [ width fill, height fill ]
+                    pageView.body
+                , footer
+                ]
     , title = pageView.title
     }
+
+
+header : Element msg
+header =
+    row
+        [ width fill, alignTop, padding 16, spacing 16 ]
+        [ link [ alignLeft ] { url = "/", label = el [ Font.bold, Font.size 36, mouseOver [ Font.color <| rgb255 150 150 150 ] ] <| text "Paula" }
+        , link [ alignLeft ] { url = "/projects", label = el [ mouseOver [ Font.color <| rgb255 150 150 150 ] ] <| text "Projects" }
+        ]
+
+
+footer : Element msg
+footer =
+    none
