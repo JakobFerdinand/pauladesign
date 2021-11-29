@@ -4,8 +4,10 @@ import Api.Project exposing (Project)
 import DataSource exposing (DataSource)
 import Element exposing (..)
 import Element.Background as Background
+import Element.Font as Font
 import Head
 import Head.Seo as Seo
+import Markdown exposing (TableOfContent, markdown)
 import Page exposing (Page, PageWithState, StaticPayload)
 import Pages.PageUrl exposing (PageUrl)
 import Pages.Url
@@ -95,7 +97,7 @@ viewProject : Project -> Element msg
 viewProject project =
     column
         []
-        [ el [] <| text project.title
+        [ el [ Font.bold ] <| text project.title
         , el
             [ width <| px 400
             , height <| px 400
@@ -104,7 +106,21 @@ viewProject project =
             none
         , case project.description of
             Just description ->
-                text description
+                case markdown <| String.replace "\u{000D}" "" description of
+                    Ok ( toc, renderedEls ) ->
+                        column
+                            [ spacing 30
+                            , padding 10
+                            , centerX
+                            , width fill
+                            ]
+                            renderedEls
+
+                    Err errors ->
+                        paragraph []
+                            [ text "I´m sorry but it looks like I published invalid markdown."
+                            , text "Feel free to contact me so I can updated and fix the problem."
+                            ]
 
             Nothing ->
                 none
