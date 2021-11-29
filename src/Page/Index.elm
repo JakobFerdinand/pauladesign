@@ -1,6 +1,9 @@
 module Page.Index exposing (Data, Model, Msg, page)
 
 import DataSource exposing (DataSource)
+import Element exposing (..)
+import Element.Background as Background
+import Element.Border as Border
 import Head
 import Head.Seo as Seo
 import Page exposing (Page, StaticPayload)
@@ -66,4 +69,18 @@ view :
     -> StaticPayload Data RouteParams
     -> View Msg
 view maybeUrl sharedModel static =
-    View.placeholder "Paulas Homepage"
+    { title = "Paula Design"
+    , body =
+        [ column
+            [ centerX
+            , centerY
+            , padding 30
+            , Border.rounded 5
+            , mouseOver
+                [ Background.color <| rgb255 250 175 186
+                ]
+            ]
+            [ el [ centerX, centerY ] <| text "Paula Design"
+            ]
+        ]
+    }
