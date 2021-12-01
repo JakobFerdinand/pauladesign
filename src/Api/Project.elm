@@ -14,6 +14,16 @@ type alias Project =
     }
 
 
+
+-- GROQ Query
+-- *[ _type == 'project' ]{
+--   title,
+--   "imageUrl": mainImage.asset->url,
+--   "slug": slug.current,
+--   "description": projectDescription
+-- }
+
+
 allProjects : DataSource (List Project)
 allProjects =
     DataSource.Http.get
